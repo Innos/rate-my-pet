@@ -15,6 +15,6 @@ Softuni Practice Frontend Application
 - [x] Lit-html for templating
 - [x] Firebase authentication
 - [ ] Firebase database
-- [ ] Firebase hosting
+- [x] Firebase hosting
 - [ ] Mocha for unit testing
 - [ ] Playwright for e2e testing
