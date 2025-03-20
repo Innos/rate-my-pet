@@ -5,6 +5,7 @@ import {
   setPersistence,
   browserLocalPersistence,
 } from "firebase/auth";
+import page from "page";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -23,7 +24,8 @@ export const auth = getAuth(app);
 
 setPersistence(auth, browserLocalPersistence)
   .then(() => {
-    // return signInWithEmailAndPassword(auth, email, password);
+    // Refresh the current page to get the async persistance
+    page.redirect(location.pathname);
   })
   .catch((error) => {
     console.error(`Persistance Error: ${error.message}`);
