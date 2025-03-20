@@ -12,6 +12,7 @@
     "vite": "^6.2.0"
   },
   "dependencies": {
+    "firebase": "^11.5.0",
     "lit-html": "^3.2.1",
     "page": "^1.11.6"
   }
