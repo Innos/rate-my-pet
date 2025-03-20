@@ -13,7 +13,7 @@ Softuni Practice Frontend Application
 - [x] Tailwind CSS with UI components
 - [x] Page.js for routing
 - [x] Lit-html for templating
-- [ ] Firebase authentication
+- [x] Firebase authentication
 - [ ] Firebase database
 - [ ] Firebase hosting
 - [ ] Mocha for unit testing
