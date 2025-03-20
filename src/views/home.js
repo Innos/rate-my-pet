@@ -1,7 +1,5 @@
 import { html, render } from "lit-html";
 
-console.log({ html, render });
-
 const template = () => html`<div class="bg-white">
   <header class="absolute inset-x-0 top-0 z-50">
     <nav
