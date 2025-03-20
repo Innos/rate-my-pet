@@ -2,7 +2,7 @@ import { html, render } from "lit-html";
 
 const rootEl = document.getElementById("root");
 
-const layoutTemplate = (body) => html`<div class="h-full bg-white">
+const layoutTemplate = (body, ctx) => html`<div class="h-full bg-white">
   <header class="absolute inset-x-0 top-0 z-50">
     <nav
       class="flex items-center justify-between p-6 lg:px-8"
@@ -44,13 +44,19 @@ const layoutTemplate = (body) => html`<div class="h-full bg-white">
       <div class="hidden lg:flex lg:gap-x-12">
         <a href="/" class="text-sm/6 font-semibold text-gray-900">Home</a>
         <a href="/pets" class="text-sm/6 font-semibold text-gray-900">Pets</a>
-        <a href="/login" class="text-sm/6 font-semibold text-gray-900">Login</a>
       </div>
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a href="#" class="text-sm/6 font-semibold text-gray-900"
-          >Log in <span aria-hidden="true">&rarr;</span></a
-        >
-      </div>
+
+      ${ctx.isAuthenticated
+        ? html`<div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a href="/logout" class="text-sm/6 font-semibold text-gray-900"
+              >Log out<span aria-hidden="true">&rarr;</span></a
+            >
+          </div>`
+        : html`<div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a href="/login" class="text-sm/6 font-semibold text-gray-900"
+              >Log in <span aria-hidden="true">&rarr;</span></a
+            >
+          </div>`}
     </nav>
 
     <!-- Mobile menu, show/hide based on menu open state. -->
@@ -131,8 +137,11 @@ const layoutTemplate = (body) => html`<div class="h-full bg-white">
 </div>`;
 
 export default function (ctx, next) {
+  const { user, isAuthenticated } = ctx;
+  console.log({ user, isAuthenticated });
+
   ctx.render = (templateResult) => {
-    render(layoutTemplate(templateResult), rootEl);
+    render(layoutTemplate(templateResult, ctx), rootEl);
   };
 
   next();
