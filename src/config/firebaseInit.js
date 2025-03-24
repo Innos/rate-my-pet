@@ -15,6 +15,7 @@ const firebaseConfig = {
   storageBucket: "rate-my-pet-softuni.firebasestorage.app",
   messagingSenderId: "1042454478651",
   appId: "1:1042454478651:web:5cb83a1d1474f2f4d1c11e",
+  databaseURL: "https://rate-my-pet-softuni-default-rtdb.europe-west1.firebasedatabase.app/",
 };
 
 // Initialize Firebase
