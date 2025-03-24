@@ -7,7 +7,7 @@ const template = (pets) => html`<h3>
   ${pets.map(p => petTemplate(p))}
 </h3>`;
 
-const petTemplate = (pet) => html`<p>${pet.name} - ${pet.animalType} - ${pet.breed}</p>`
+const petTemplate = (pet) => html`<p id=${pet._id}>${pet.name} - ${pet.animalType} - ${pet.breed}</p>`
 
 export default function (ctx) {
   let db = getDatabase(app);
@@ -16,7 +16,14 @@ export default function (ctx) {
   onValue(petsRef, (snapshot) => {
     const petsData = snapshot.val();
     console.log(petsData);
-    ctx.render(template(Object.values(petsData)));
+    let pets = [];
+    for (const key in petsData) {
+        let pet = Object.assign({}, petsData[key]);
+        pet._id = key;
+        pets.push(pet);
+    }
+
+    ctx.render(template(pets));
   }, (error) => {
     console.error(error);
   });

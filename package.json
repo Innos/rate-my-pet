@@ -10,6 +10,9 @@
     "deploy": "npm run build && firebase deploy"
   },
   "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.1.0",
+    "playwright-chromium": "^1.51.1",
     "vite": "^6.2.0"
   },
   "dependencies": {

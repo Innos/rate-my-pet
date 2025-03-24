@@ -3,7 +3,7 @@ import app from "../config/firebaseInit";
 import page from "page";
 import { child, getDatabase, push, ref, update } from "firebase/database";
 
-const template = (onSubmit) => html`
+const template = (onSubmit, id) => html`
   <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <img
@@ -15,6 +15,20 @@ const template = (onSubmit) => html`
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <form @submit=${onSubmit} class="space-y-6" action="#" method="POST">
+      <div>
+          <div class="flex items-center justify-between">
+          </div>
+          <div class="hidden">
+            <input
+              type="text"
+              name="petKey"
+              id="petKey"
+              .value=${id ?? ''}
+              class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            />
+          </div>
+        </div>
+
         <div>
           <label for="name" class="block text-sm/6 font-medium text-gray-900"
             >Name</label
@@ -83,14 +97,16 @@ const template = (onSubmit) => html`
 `;
 
 export default function (ctx) {
-  ctx.render(template(createPetSubmitHandler));
+    let db = getDatabase(app);
+    let newPetKey = push(child(ref(db), 'pets')).key;
+    ctx.render(template(createPetSubmitHandler, newPetKey));
 }
 
 async function createPetSubmitHandler(e) {
   e.preventDefault();
 
   const formData = new FormData(e.currentTarget);
-  const { name, animalType, breed } = Object.fromEntries(formData);
+  const { name, animalType, breed, petKey } = Object.fromEntries(formData);
 
   try {
     
@@ -98,12 +114,15 @@ async function createPetSubmitHandler(e) {
     const petData = {
         name,
         animalType,
-        breed
+        breed, 
+        petKey
     };
 
     let db = getDatabase(app);
     // Get a key for a new Post.
-    const newPetKey = push(child(ref(db), 'pets')).key;
+    let newPetKey = petKey;
+
+    console.log(newPetKey);
 
     // Write the new post's data simultaneously in the posts list and the user's post list.
     const updates = {};
