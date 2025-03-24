@@ -16,7 +16,7 @@ export default function (ctx) {
   onValue(petsRef, (snapshot) => {
     const petsData = snapshot.val();
     console.log(petsData);
-    ctx.render(template(petsData));
+    ctx.render(template(Object.values(petsData)));
   }, (error) => {
     console.error(error);
   });

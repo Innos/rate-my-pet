@@ -44,6 +44,7 @@ const layoutTemplate = (body, ctx) => html`<div class="h-full bg-white">
       <div class="hidden lg:flex lg:gap-x-12">
         <a href="/" class="text-sm/6 font-semibold text-gray-900">Home</a>
         <a href="/pets" class="text-sm/6 font-semibold text-gray-900">Pets</a>
+        <a href="/createPet" class="text-sm/6 font-semibold text-gray-900">Create Pet</a>
       </div>
 
       ${ctx.isAuthenticated
